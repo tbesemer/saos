@@ -1,1 +1,1 @@
-export OS_MACHINE := zynq-zc706
+export OS_MACHINE := zynq-zc702
