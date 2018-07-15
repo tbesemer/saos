@@ -24,4 +24,11 @@ else
     echo "[saos_yocto]: Exists, not cloning"
 fi
 
+if [ ! -d saos_yboot ]
+then
+    git clone -b $CUR_BRANCH https://github.com/tbesemer/saos_uboot.git
+else
+    echo "[saos_yocto]: Exists, not cloning"
+fi
+
 exit 0

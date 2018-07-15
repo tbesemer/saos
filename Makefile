@@ -3,7 +3,7 @@ include ${OS_CONTAINER_ROOT}/config/machine.mk
 export OS_KERNEL_CONTAINER_ROOT := ${OS_CONTAINER_ROOT}/saos_kernel
 export OS_YOCTO_CONTAINER_ROOT := ${OS_CONTAINER_ROOT}/saos_yocto
 
-export OS_ENV_FILE := /nas/opt/poky/2.2.4/environment-setup-cortexa9hf-neon-poky-linux-gnueabi
+export OS_ENV_FILE := /opt/poky/2.2.4/environment-setup-cortexa9hf-neon-poky-linux-gnueabi
 
 .PHONY: saos_build_yocto
 saos_build_yocto:
