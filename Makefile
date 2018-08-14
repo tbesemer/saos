@@ -8,10 +8,17 @@ export OS_ENV_FILE := /opt/poky/2.2.4/environment-setup-cortexa9hf-neon-poky-lin
 .PHONY: saos_build_yocto
 saos_build_yocto:
 	make -C ${OS_YOCTO_CONTAINER_ROOT}
+	cp -p ${OS_YOCTO_CONTAINER_ROOT}/deploy/rootfs.cpio.gz ${OS_CONTAINER_ROOT}/deploy/
 
 .PHONY: saos_build_kernel
 saos_build_kernel: saos_chk_env_file
 	@ . ${OS_ENV_FILE} && make -C ${OS_KERNEL_CONTAINER_ROOT}
+	cp -p ${OS_KERNEL_CONTAINER_ROOT}/deploy/zImage ${OS_CONTAINER_ROOT}/deploy/
+	cp -p ${OS_KERNEL_CONTAINER_ROOT}/deploy/zImage.dtb ${OS_CONTAINER_ROOT}/deploy/
+
+.PHONY: saos_build_dtb
+saos_build_dtb:
+	mkimage -f config/os_image.its  deploy/saos_raw_os.itb
 
 .PHONY: saos_fetch_subtrees
 saos_fetch_subtrees:
