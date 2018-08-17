@@ -16,9 +16,15 @@ saos_build_kernel: saos_chk_env_file
 	cp -p ${OS_KERNEL_CONTAINER_ROOT}/deploy/zImage ${OS_CONTAINER_ROOT}/deploy/
 	cp -p ${OS_KERNEL_CONTAINER_ROOT}/deploy/zImage.dtb ${OS_CONTAINER_ROOT}/deploy/
 
+.PHONY: saos_clean_kernel
+saos_clean_kernel: saos_chk_env_file
+	@ . ${OS_ENV_FILE} && make -C ${OS_KERNEL_CONTAINER_ROOT} kernel_standard_mrproper
+	@ . ${OS_ENV_FILE} && make -C ${OS_KERNEL_CONTAINER_ROOT} kernel_deploy_clean
+
 .PHONY: saos_build_dtb
-saos_build_dtb:
+saos_build_dtb: saos_build_kernel
 	mkimage -f config/os_image.its  deploy/saos_raw_os.itb
+	cp deploy/saos_raw_os.itb /tftpboot/
 
 .PHONY: saos_fetch_subtrees
 saos_fetch_subtrees:
