@@ -32,7 +32,7 @@
 
         ramdisk@1 {
             description = "ramdisk";
-            data = /incbin/("../deploy/rootfs.cpio.gz");
+            data = /incbin/("../deploy/saos-rootfs.cpio.gz");
             type = "ramdisk";
             arch = "arm";
             os = "linux";

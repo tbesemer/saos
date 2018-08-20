@@ -8,7 +8,7 @@ export OS_ENV_FILE := /opt/poky/2.2.4/environment-setup-cortexa9hf-neon-poky-lin
 .PHONY: saos_build_yocto
 saos_build_yocto:
 	make -C ${OS_YOCTO_CONTAINER_ROOT}
-	cp -p ${OS_YOCTO_CONTAINER_ROOT}/deploy/rootfs.cpio.gz ${OS_CONTAINER_ROOT}/deploy/
+	cp -p ${OS_YOCTO_CONTAINER_ROOT}/deploy/saos-rootfs.cpio.gz ${OS_CONTAINER_ROOT}/deploy/
 
 .PHONY: saos_build_kernel
 saos_build_kernel: saos_chk_env_file
@@ -21,8 +21,8 @@ saos_clean_kernel: saos_chk_env_file
 	@ . ${OS_ENV_FILE} && make -C ${OS_KERNEL_CONTAINER_ROOT} kernel_standard_mrproper
 	@ . ${OS_ENV_FILE} && make -C ${OS_KERNEL_CONTAINER_ROOT} kernel_deploy_clean
 
-.PHONY: saos_build_dtb
-saos_build_dtb: saos_build_kernel
+.PHONY: saos_build_itb
+saos_build_itb: saos_build_kernel
 	mkimage -f config/os_image.its  deploy/saos_raw_os.itb
 	cp deploy/saos_raw_os.itb /tftpboot/
 
